@@ -284,7 +284,7 @@ checkboxes.forEach(item => {
     item.addEventListener('blur', e =>
     {
         let selected = document.querySelector("label[class=focus]");
-        selected.classList.remove('focus');
+        selected.className = '';
     });
 
 });

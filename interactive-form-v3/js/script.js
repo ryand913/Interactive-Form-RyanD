@@ -29,7 +29,8 @@ else {
 //access elements of DOM needed targeted by the conditional logic
 let colorDropdown = document.querySelector("select[id=color]");
 let designDropdown = document.querySelector("select[id=design]");
-let colorOptions = colorDropdown.children;
+let colorOptions = document.querySelectorAll("option[data-theme]");
+
 //disable the color dropdown
 colorDropdown.disabled = true;
 
@@ -39,7 +40,7 @@ designDropdown.addEventListener("change", (e) => {
     for (let i = 0; i <= colorOptions.length; i++) {
     let selection = e.target.value;
     let theme = colorOptions[i].getAttribute("data-theme");
-        if (selection === theme){
+        if (theme && selection === theme){
             colorOptions[i].hidden = false;
             colorOptions[i].setAttribute("selected", "true");
         }
@@ -66,30 +67,28 @@ activitiesList.addEventListener("change", (e) =>
     initialTotal = initialTotal - clickedCost;
  }
  total.innerHTML = `Total: $ ${initialTotal}`;
-
+ let allOptions = document.querySelectorAll("input[type=checkbox]");
+ for (let i = 0; i <= allOptions.length; i++){
+     if (e.target.getAttribute("data-day-and-time") === allOptions[i].getAttribute("data-day-and-time")
+     && e.target.checked === true){
+         allOptions[i].disabled = true;
+         e.target.removeAttribute("disabled");
+     }
+     else if (e.target.getAttribute("data-day-and-time") !== allOptions[i].getAttribute("data-day-and-time")
+     && allOptions[i].disabled === false){
+         allOptions[i].removeAttribute("disabled");
+         e.target.enabled = true;
+     }
+     else if (e.target.getAttribute("data-day-and-time") === allOptions[i].getAttribute("data-day-and-time")
+     && e.target.checked === false){
+         allOptions[i].disabled = false;
+         e.target.enabled = false;
+     }
+ }
 });
 
-activitiesList.addEventListener("change", (e) =>
-{
-    let allOptions = document.querySelectorAll("input[type=checkbox]");
-    for (let i = 0; i <= allOptions.length; i++){
-        if (e.target.getAttribute("data-day-and-time") === allOptions[i].getAttribute("data-day-and-time")
-        && e.target.checked === true){
-            allOptions[i].disabled = true;
-            e.target.disabled = false;
-        }
-        else if (e.target.getAttribute("data-day-and-time") !== allOptions[i].getAttribute("data-day-and-time")
-        && allOptions[i].disabled === false){
-            allOptions[i].disabled = false;
-            e.target.enabled = true;
-        }
-        else if (e.target.getAttribute("data-day-and-time") === allOptions[i].getAttribute("data-day-and-time")
-        && e.target.checked === false){
-            allOptions[i].disabled = false;
-            e.target.enabled = false;
-        }
-    }
-});
+
+
 document.querySelector("option[value='credit-card']").setAttribute("selected",true);
 let bitcoinOption = document.querySelector("div[id=bitcoin]");
 let paypalOption = document.querySelector("div[id=paypal]");
@@ -266,13 +265,18 @@ form.submit();
   }
 
 });
+
+
+
+
 //Accessibility Tasks
 let checkboxes = document.querySelectorAll("input[type=checkbox]");
 checkboxes.forEach(item => {
-    item.addEventListener('focus', e =>
+    item.addEventListener('focus', (e) =>
     {
+
         item.parentElement.className = 'focus';
-    })
+    });
 
 });
 
@@ -280,11 +284,10 @@ checkboxes.forEach(item => {
     item.addEventListener('blur', e =>
     {
         let selected = document.querySelector("label[class=focus]");
-        selected.className = '';
-    })
+        selected.classList.remove('focus');
+    });
 
 });
-
 // cvv realtime validation
 
 let cv = document.querySelector("input[id=cvv]");

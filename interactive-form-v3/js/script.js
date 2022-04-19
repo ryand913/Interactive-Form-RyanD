@@ -253,15 +253,14 @@ form.addEventListener("submit", (e) => {
   if 
       (nameValid && emailValid && activityValid && numberValid && cvValid && zipValid  && paymentValue === 'credit-card') 
  {
-alert('validddd');
+form.submit();
 
   }
   else if ((paymentValue === 'bitcoin' || paymentValue === 'paypal')&& nameValid && emailValid && activityValid){
-      alert('valid');
+form.submit();
   }
 
   else {
-      alert('invaliddddd');
     e.preventDefault();
  
   }

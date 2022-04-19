@@ -104,6 +104,7 @@ removeOptions();
  paymentDropdown.addEventListener("change", (e) => {
      let options = paymentDropdown.children;
  for (let i = 0; i <= options.length; i++) {
+    //hide & display fields conditionally based on the selected option
   if (e.target.value === "paypal"){
     creditCardOption.hidden = true
     bitcoinOption.hidden = true
@@ -124,7 +125,10 @@ else if (e.target.value === "credit-card"){
 });
 
 const form = document.querySelector("form");
+//each form required for validation has a function assigned
 form.addEventListener("submit", (e) => {
+    //this function checks that there is a name value. If there is a value, the valid class is assigned and hint is removed.
+    //if name is null, then assign the not-valid class and show the hint
     function nameCheck(name) {
         let nameObject = document.querySelector("input[id=name]");
         let nameEntry = document.querySelector("input[id=name]").value;
@@ -140,11 +144,13 @@ form.addEventListener("submit", (e) => {
             return false
             }
     }
+        //assign true false value for later validation
         let nameValid = nameCheck();
     function emailCheck(email) {
+        //uses a regex check to determine validity of email. If email regex test is true, the valid class is assigned and hint is removed.
+    //If email regex test is false, then assign the not-valid class and show the hint
         let emailObject = document.querySelector("input[id=email]");
         let emailEntry = document.querySelector("input[id=email]").value;
-        let emailHint = document.querySelector("span[id=email-hint]").textContent;
         let regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.com/;
             if(regex.test(emailEntry)){
                 emailObject.parentElement.className = "valid";
@@ -157,8 +163,10 @@ form.addEventListener("submit", (e) => {
                 return false
             }
         }
+        //assign true false value for later validation
      let emailValid = emailCheck();
     function activityCheck(activity) {
+        //if there is a value greater than 0 in the total element, there is more than one activity selected and is therefore valid
         let activitiesObject = document.querySelector('fieldset#activities');
         let activitiesHint = document.querySelector("p#activities-hint");
         if (initialTotal > 0){
@@ -172,6 +180,7 @@ form.addEventListener("submit", (e) => {
             return false
         }
     }
+    //assign true false value for later validation
     let activityValid = activityCheck();
 
 
@@ -204,6 +213,7 @@ form.addEventListener("submit", (e) => {
                 return true
             }
             }      
+            //assign true false value for later validation
         let numberValid = numberCheck();
     function cvCheck(cv) {
         let cvEntry = document.querySelector("input[id=cvv]").value;
@@ -220,7 +230,7 @@ form.addEventListener("submit", (e) => {
                         return false
                     }
                 }
-            
+            //assign true false value for later validation
             let cvValid = cvCheck();
      function zipCheck(zip) {
         let zipEntry = document.querySelector("input[id=zip]").value;
@@ -237,7 +247,7 @@ form.addEventListener("submit", (e) => {
                             return false
                         }
                     }
-                
+     //assign true false value for later validation           
     let zipValid = zipCheck();
  let paymentValue =   document.querySelector("select[id=payment]").value;
   if 

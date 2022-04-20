@@ -37,7 +37,7 @@ colorDropdown.disabled = true;
 designDropdown.addEventListener("change", (e) => {
     //enable the color dropdown once an option has been selected
     colorDropdown.disabled = false;
-    for (let i = 0; i <= colorOptions.length; i++) {
+    for (let i = 0; i < colorOptions.length; i++) {
     let selection = e.target.value;
     let theme = colorOptions[i].getAttribute("data-theme");
         if (theme && selection === theme){
@@ -68,7 +68,7 @@ activitiesList.addEventListener("change", (e) =>
  }
  total.innerHTML = `Total: $ ${initialTotal}`;
  let allOptions = document.querySelectorAll("input[type=checkbox]");
- for (let i = 0; i <= allOptions.length; i++){
+ for (let i = 0; i < allOptions.length; i++){
      if (e.target.getAttribute("data-day-and-time") === allOptions[i].getAttribute("data-day-and-time")
      && e.target.checked === true){
          allOptions[i].disabled = true;
@@ -102,7 +102,7 @@ removeOptions();
 
  paymentDropdown.addEventListener("change", (e) => {
      let options = paymentDropdown.children;
- for (let i = 0; i <= options.length; i++) {
+ for (let i = 0; i < options.length; i++) {
     //hide & display fields conditionally based on the selected option
   if (e.target.value === "paypal"){
     creditCardOption.hidden = true
@@ -150,7 +150,7 @@ form.addEventListener("submit", (e) => {
     //If email regex test is false, then assign the not-valid class and show the hint
         let emailObject = document.querySelector("input[id=email]");
         let emailEntry = document.querySelector("input[id=email]").value;
-        let regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.com/;
+        let regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{3}$/;
             if(regex.test(emailEntry)){
                 emailObject.parentElement.className = "valid";
                 emailObject.parentElement.lastElementChild.classList.add('hint');

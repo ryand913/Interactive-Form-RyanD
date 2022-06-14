@@ -1,0 +1,36 @@
+object['attribute'];
+
+this.attribute - this is the variable of the object
+
+Class is a blueprint for objects
+
+cotains a constructor method - dictates the properties in the class
+
+
+getter, setter methods - allow for flexibility
+
+set is always one paramenter
+
+callback function
+
+create a function like
+
+callBack()
+
+sencond function is a new function with the original function as a parameter
+
+doCallBack(callback)
+
+forEach(singleItem, callback)
+
+filter() items from an array
+
+map, transform all items in an array
+
+reduce - turn all items in an array to one value
+
+will have two parameters - 
+
+acc - running value of aggregated values
+
+cur - the current item
